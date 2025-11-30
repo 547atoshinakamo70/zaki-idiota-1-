@@ -1,1 +1,11 @@
+langchain
+langchain-openai
+langchain-chroma
+langchain-core
+langgraph
+chromadb
+fastapi
+uvicorn
+python-multipart
+pydantic
 
