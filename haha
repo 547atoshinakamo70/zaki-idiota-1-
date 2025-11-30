@@ -1,0 +1,77 @@
+openapi: 3.1.0
+info:
+  title: DGT RAG API
+  version: "1.0"
+servers:
+  - url: https://dgt-1bf5f8c56c9c5dcd9516a1ba62c5ebf1.us.langgraph.app
+paths:
+  /health:
+    get:
+      operationId: health
+      summary: Health check
+      responses:
+        "200":
+          description: OK
+  /ingest:
+    post:
+      operationId: ingest
+      summary: Ingest files from a local or mounted path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [sourcePath]
+              properties:
+                sourcePath:
+                  type: string
+                  example: C:\\Users\\<you>\\OneDrive\\GHC-Canonical
+                patterns:
+                  type: array
+                  items: { type: string }
+                  example: ["**/*.pdf","**/*.docx","**/*.md"]
+      responses:
+        "200": { description: Ingestion started }
+  /index:
+    post:
+      operationId: index
+      summary: Build/commit the vector index for the default collection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                collection:
+                  type: string
+                  default: default
+      responses:
+        "200": { description: Indexing complete }
+  /query:
+    post:
+      operationId: query
+      summary: Query the RAG index
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [query]
+              properties:
+                query: { type: string, example: "What are our EU-GMP validation steps?" }
+                k: { type: integer, default: 6 }
+      responses:
+        "200": { description: Answer with citations }
+components:
+  securitySchemes:
+    xApiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+security: []  # leave empty; we’ll attach key in the GPT settings if needed
+Repositorio
+ZAKIBAYDOUN/digital-roots
+N.º de tareas
