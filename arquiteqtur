@@ -1,0 +1,11 @@
+​:codex-file-citation[codex-file-citation]{line_range_start=1 line_range_end=56 path=README.md git_url="https://github.com/ZAKIBAYDOUN/GHC-DT/blob/main/README.md#L1-L56"}​
+
+### langgraph.json
+```json
+{
+  "dependencies": ["app/requirements.txt"],
+  "graphs": {
+    "agent": "app.ghc_twin:app"
+  },
+  "env": ["OPENAI_API_KEY", "VECTOR_STORE_DIR", "ALLOWED_ORIGINS", "INGEST_AUTH_TOKEN"]
+}
